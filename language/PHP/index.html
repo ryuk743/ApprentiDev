@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Cours complet</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --php-purple: #8892be;
+            --php-dark: #4F5B93;
+            --php-light: #E0E0F0;
+            --php-white: #ffffff;
+            --php-gray: #dcdcdc;
+            --php-blue: #5A69A6;
+            --header-bg: #4F5B93;
+            --header-text: #ffffff;
+        }
+
+        .chapters {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .chapter-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter-card h3 {
+            margin-top: 0;
+            color: var(--php-purple);
+        }
+
+        .chapter-card p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .chapter-card .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--php-purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .chapter-card .btn:hover {
+            background-color: var(--header-bg);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Cours Complet PHP</h1>
+        <p>Apprenez le développement web avec PHP</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Bienvenue dans votre formation PHP</h2>
+            <p>
+                Ce cours vous guide pas à pas dans l'apprentissage du langage PHP,
+                depuis les bases jusqu'aux concepts avancés. Chaque chapitre contient
+                des explications détaillées, des exemples de code et des exercices pratiques
+                pour renforcer vos connaissances.
+            </p>
+        </section>
+
+        <section class="chapters">
+            <div class="chapter-card">
+                <h3>Chapitre 1: Installation de PHP sur Windows</h3>
+                <p>Apprenez à installer PHP sur Windows, configurer votre environnement de développement (XAMPP, WAMP...)</p>
+                <a href="chapitres/installation.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 2: Variables et Types</h3>
+                <p>Apprenez à déclarer des variables, découvrir les types de données et leur manipulation en PHP.</p>
+                <a href="chapitres/variables-types.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 3: Les tableaux</h3>
+                <p>Comprenez comment créer et manipuler des tableaux simples et multidimensionnels en PHP.</p>
+                <a href="chapitres/tableaux.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 4: Les conditions</h3>
+                <p>Maîtrisez les instructions conditionnelles (if, else, switch) pour contrôler le flux d'exécution.</p>
+                <a href="chapitres/conditions.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 5: Les boucles</h3>
+                <p>Apprenez à répéter des instructions avec les boucles for, while, do...while et foreach.</p>
+                <a href="chapitres/boucles.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 6: Les fonctions</h3>
+                <p>Découvrez comment déclarer et utiliser des fonctions pour structurer votre code PHP.</p>
+                <a href="chapitres/fonctions.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 7: Création d'une fonction</h3>
+                <p>Créez vos propres fonctions personnalisées pour améliorer la réutilisabilité du code.</p>
+                <a href="chapitres/fonctions-utilisateurs.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 8: Require et include</h3>
+                <p>Apprenez à inclure des fichiers PHP externes pour organiser votre projet de manière modulaire.</p>
+                <a href="chapitres/require-include.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h3>Chapitre 9: PHP et le HTML</h3>
+                <p>Découvrez comment intégrer du PHP dans des pages HTML pour générer du contenu dynamique.</p>
+                <a href="chapitres/html.html" class="btn">Accéder au chapitre</a>
+            </div>
+            
+
+
+        </section>
+
+
+
+        <section>
+            <h2>Ressources complémentaires</h2>
+            <ul>
+                <li><a href="https://www.php.net/docs.php" target="_blank">Documentation officielle PHP</a></li>
+                <li><a href="https://www.php.net/manual/fr/" target="_blank">Manuel PHP en français</a></li>
+                <li><a href="exercices/index.html">Exercices supplémentaires</a></li>
+                <li><a href="references/index.html">Fiches de référence</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

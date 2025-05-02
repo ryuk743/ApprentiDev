@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Variables et Types</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les fondamentaux de PHP</h1>
+        <p>Variables, types de données et opérations de base</p>
+    </header>
+
+    <main>
+        <h1>Débuter avec PHP</h1>
+
+        <section>
+            <h2>Création d'un fichier PHP</h2>
+            <p>Pour travailler avec PHP, créez un fichier avec l'extension <code>.php</code> (ex. : <code>demo.php</code>).</p>
+            <p>Ce fichier peut être ouvert dans un éditeur de texte comme Visual Studio Code, Sublime Text ou PHPStorm.</p>
+            <p><strong>Bon à savoir :</strong> Un fichier PHP peut contenir du HTML, du CSS et du JavaScript en plus du code PHP.</p>
+        </section>
+
+        <section>
+            <h2>Structure de base d'un fichier PHP</h2>
+            <p>Le code PHP doit être écrit entre les balises :</p>
+            <pre>&lt;?php
+// Code PHP ici
+?&gt;</pre>
+            <p>Le texte hors des balises est directement affiché tel quel.</p>
+            <p><strong>Variantes :</strong> PHP supporte aussi les balises courtes <code>&lt;? ?&gt;</code> mais elles ne sont pas recommandées pour la portabilité.</p>
+        </section>
+
+        <section>
+            <h2>Utiliser le terminal</h2>
+            <p>Depuis le terminal intégré dans Visual Studio Code, exécutez un fichier PHP avec la commande :</p>
+            <pre>php nom_du_fichier.php</pre>
+            <p><strong>Options utiles :</strong></p>
+            <ul>
+                <li><code>-f</code> pour spécifier un fichier : <code>php -f script.php</code></li>
+                <li><code>-r</code> pour exécuter du code directement : <code>php -r 'echo "Hello";'</code></li>
+                <li><code>-a</code> pour le mode interactif</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Les variables en PHP</h2>
+            <p>Une variable commence toujours par un <code>$</code>, suivi du nom de la variable.</p>
+            <pre>
+$nom = "Marc";        // Chaîne de caractères
+$age = 25;            // Entier
+$prix = 19.99;        // Nombre flottant
+$estActif = true;     // Booléen
+            </pre>
+            <p><strong>Conventions de nommage :</strong></p>
+            <ul>
+                <li>Doit commencer par une lettre ou underscore</li>
+                <li>Ne peut pas commencer par un chiffre</li>
+                <li>N'autorise que caractères alphanumériques et underscores</li>
+                <li>Est sensible à la casse (<code>$Nom</code> et <code>$nom</code> sont différents)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Afficher une variable</h2>
+            <p>On utilise <code>echo</code> ou <code>print</code> pour afficher une variable :</p>
+            <pre>
+echo $nom;          // Affiche la valeur
+print $nom;         // Alternative à echo
+var_dump($nom);     // Affiche le type et la valeur (débogage)
+            </pre>
+            <p><strong>Différence :</strong> <code>echo</code> peut prendre plusieurs paramètres, <code>print</code> retourne toujours 1.</p>
+        </section>
+
+        <section>
+            <h2>Concaténation de chaînes</h2>
+            <p>Pour coller deux chaînes, on utilise le symbole <code>.</code> :</p>
+            <pre>
+echo $prenom . " " . $nom;  // Marc Dupont
+            </pre>
+            <p>Depuis PHP 8.0, on peut aussi utiliser l'interpolation avec des accolades :</p>
+            <pre>
+echo "{$prenom} {$nom}";    // Marc Dupont
+            </pre>
+        </section>
+
+        <section>
+            <h2>Différence entre guillemets simples et doubles</h2>
+            <ul>
+                <li><strong>Guillemets doubles</strong> :
+                    <ul>
+                        <li>Interprètent les variables (<code>"Bonjour $nom"</code>)</li>
+                        <li>Interprètent les caractères spéciaux (<code>\n</code>, <code>\t</code>)</li>
+                        <li>Plus lents à traiter que les simples</li>
+                    </ul>
+                </li>
+                <li><strong>Guillemets simples</strong> :
+                    <ul>
+                        <li>N'interprètent pas les variables (<code>'Bonjour $nom'</code> affichera littéralement "$nom")</li>
+                        <li>N'interprètent que <code>\'</code> et <code>\\</code></li>
+                        <li>Plus rapides à traiter</li>
+                    </ul>
+                </li>
+            </ul>
+            <pre>
+$nom = "Jean";
+echo "Bonjour $nom";    // Bonjour Jean
+echo 'Bonjour $nom';    // Bonjour $nom
+            </pre>
+        </section>
+
+        <section>
+            <h2>Types de base en PHP</h2>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Exemple</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Entiers</strong></td>
+                    <td><code>$x = 10;</code></td>
+                    <td>Nombres entiers, positifs ou négatifs</td>
+                </tr>
+                <tr>
+                    <td><strong>Flottants</strong></td>
+                    <td><code>$y = 12.5;</code></td>
+                    <td>Nombres à virgule flottante</td>
+                </tr>
+                <tr>
+                    <td><strong>Chaînes</strong></td>
+                    <td><code>$nom = "Jean";</code></td>
+                    <td>Séquences de caractères</td>
+                </tr>
+                <tr>
+                    <td><strong>Booléens</strong></td>
+                    <td><code>$valide = true;</code></td>
+                    <td>Vrai ou faux</td>
+                </tr>
+                <tr>
+                    <td><strong>Null</strong></td>
+                    <td><code>$inconnu = null;</code></td>
+                    <td>Variable sans valeur</td>
+                </tr>
+                <tr>
+                    <td><strong>Tableaux</strong></td>
+                    <td><code>$tab = [1, 2, 3];</code></td>
+                    <td>Collection ordonnée de valeurs</td>
+                </tr>
+            </table>
+            <p><strong>Vérification de type :</strong> Utilisez <code>is_int()</code>, <code>is_string()</code>, etc. pour vérifier un type.</p>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            
+            <article>
+                <h3>Exercice 1 : Calcul de moyenne</h3>
+                <p>Afficher la phrase suivante : <strong>"Bonjour Marc Dos, vous avez eu 15 de moyenne."</strong></p>
+                <pre>
+$prenom = "Marc";
+$nom = "Dos";
+$note1 = 10;
+$note2 = 20;
+$moyenne = ($note1 + $note2) / 2;
+
+echo "Bonjour $prenom $nom, vous avez eu $moyenne de moyenne.";
+                </pre>
+                <p>Version avec concaténation :</p>
+                <pre>
+echo "Bonjour " . $prenom . " " . $nom . ", vous avez eu " . $moyenne . " de moyenne.";
+                </pre>
+            </article>
+
+            <article>
+                <h3>Exercice 2 : Conversion de température</h3>
+                <p>Convertir 100°F en Celsius en utilisant la formule : <code>C = (F - 32) * 5/9</code></p>
+                <pre>
+$fahrenheit = 100;
+$celsius = ($fahrenheit - 32) * 5/9;
+echo "$fahrenheit°F équivaut à " . round($celsius, 2) . "°C";
+                </pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Toujours initialiser les variables avant de les utiliser</li>
+                <li>Utiliser des noms descriptifs (<code>$nombre_articles</code> plutôt que <code>$na</code>)</li>
+                <li>Éviter les variables globales quand c'est possible</li>
+                <li>Utiliser le camelCase ou les underscores pour les noms composés</li>
+                <li>Commenter votre code quand la logique est complexe</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

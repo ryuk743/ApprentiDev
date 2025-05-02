@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Les Boucles</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les Boucles en PHP</h1>
+        <p>Répéter des opérations dans votre code</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction aux boucles</h2>
+            <p>Les boucles permettent d'exécuter un bloc de code plusieurs fois. PHP propose trois types de boucles principales : la boucle <code>while</code> (tant que), la boucle <code>for</code> (pour) et la boucle <code>foreach</code> (pour chaque).</p>
+            
+            <pre>
+// Exemple basique d'une boucle while
+$chiffre = null;
+while ($chiffre !== 10) {
+    $chiffre = (int)readline("Entrez une valeur : ");
+}
+echo "Bravo, vous avez gagné !";
+</pre>
+        </section>
+
+        <section>
+            <h2>La boucle while (tant que)</h2>
+            <p>La boucle <code>while</code> exécute un bloc de code tant qu'une condition spécifiée est vraie.</p>
+            
+            <pre>
+// Syntaxe de base
+while (condition) {
+    // Code à exécuter tant que la condition est vraie
+}
+
+// Exemple pratique
+$chiffre = null;
+while ($chiffre !== 10) {
+    $chiffre = (int)readline("Entrez une valeur : ");
+}
+echo "Bravo, vous avez gagné !";
+</pre>
+
+            <p>Vous pouvez aussi sortir d'une boucle <code>while</code> avec l'instruction <code>break</code> :</p>
+            
+            <pre>
+// Boucle while avec break
+while (true) {
+    $action = readline("Entrez une valeur ou 'fin' pour terminer : ");
+    if ($action === "fin") {
+        break; // Sort de la boucle
+    }
+    // Traitement de la valeur entrée
+}
+</pre>
+        </section>
+
+        <section>
+            <h2>La boucle for (pour)</h2>
+            <p>La boucle <code>for</code> est utilisée lorsque vous connaissez à l'avance le nombre d'itérations à effectuer.</p>
+            
+            <pre>
+// Syntaxe de base
+for (initialisation; condition; incrément) {
+    // Code à exécuter à chaque itération
+}
+
+// Exemple : afficher les nombres de 0 à 9
+for ($i = 0; $i < 10; $i++) {
+    echo "$i - ";
+}
+</pre>
+
+            <p>La boucle <code>for</code> est particulièrement utile pour parcourir des séquences numériques :</p>
+            
+            <pre>
+// Afficher les nombres pairs de 0 à 8
+for ($i = 0; $i < 10; $i += 2) {
+    echo "$i - ";
+}
+
+// Résultat : 0 - 2 - 4 - 6 - 8 - 
+</pre>
+        </section>
+
+        <section>
+            <h2>La boucle foreach (pour chaque)</h2>
+            <p>La boucle <code>foreach</code> est spécifique à PHP et est conçue pour simplifier le parcours des tableaux et des objets.</p>
+            
+            <pre>
+// Syntaxe de base
+foreach ($tableau as $valeur) {
+    // Code utilisant $valeur
+}
+
+// Avec récupération de la clé
+foreach ($tableau as $cle => $valeur) {
+    // Code utilisant $cle et $valeur
+}
+
+// Exemple : afficher les notes d'un élève
+$notes = [10, 15, 16];
+foreach ($notes as $note) {
+    echo "$note - ";
+}
+// Résultat : 10 - 15 - 16 - 
+</pre>
+
+            <p>La boucle <code>foreach</code> est particulièrement utile pour les tableaux associatifs :</p>
+            
+            <pre>
+// Exemple avec un tableau associatif
+$eleves = [
+    "CM2" => "Jean",
+    "CM1" => "Marc"
+];
+
+foreach ($eleves as $classe => $eleve) {
+    echo "$eleve est dans la classe $classe\n";
+}
+</pre>
+        </section>
+
+        <section>
+            <h2>Boucles imbriquées</h2>
+            <p>Il est possible d'imbriquer des boucles pour traiter des structures de données complexes :</p>
+            
+            <pre>
+// Exemple avec tableau multidimensionnel
+$eleves = [
+    "CM2" => ["Jean", "Marc", "Jane"],
+    "CM1" => ["Emilie", "Marion"]
+];
+
+foreach ($eleves as $classe => $listeEleves) {
+    echo "Classe $classe :\n";
+    foreach ($listeEleves as $eleve) {
+        echo "- $eleve\n";
+    }
+    echo "\n";
+}
+</pre>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            
+            <article>
+                <h3>Exercice 1 : Saisie de notes</h3>
+                <p>Créer un programme qui permet à l'utilisateur de saisir des notes jusqu'à ce qu'il tape "fin", puis affiche toutes les notes saisies.</p>
+                <pre>
+// Initialisation du tableau
+$notes = [];
+
+// Boucle de saisie
+while (true) {
+    $action = readline("Entrez une nouvelle note ou 'fin' pour terminer : ");
+    
+    if ($action === "fin") {
+        break;
+    }
+    
+    // Conversion en entier et ajout au tableau
+    $notes[] = (int)$action;
+}
+
+// Affichage des notes
+foreach ($notes as $note) {
+    echo "- $note\n";
+}
+</pre>
+            </article>
+
+            <article>
+                <h3>Exercice 2 : Horaires d'ouverture</h3>
+                <p>Créer un programme qui permet de saisir des créneaux horaires d'ouverture d'un magasin, puis vérifie si le magasin est ouvert à une heure donnée.</p>
+                <pre>
+// Initialisation du tableau des créneaux
+$creneaux = [];
+
+// Boucle pour saisir les créneaux
+while (true) {
+    $ouverture = (int)readline("Heure d'ouverture : ");
+    $fermeture = (int)readline("Heure de fermeture : ");
+    
+    // Vérification de la cohérence des horaires
+    if ($ouverture >= $fermeture) {
+        echo "Le créneau ne peut pas être enregistré car l'heure de début ($ouverture) est supérieure à l'heure de fin ($fermeture)\n";
+        continue;
+    }
+    
+    // Ajout du créneau au tableau
+    $creneaux[] = [$ouverture, $fermeture];
+    
+    // Demande pour ajouter un autre créneau
+    $action = readline("Voulez-vous enregistrer un nouveau créneau ? (o/n) : ");
+    if ($action === "n") {
+        break;
+    }
+}
+
+// Affichage des horaires d'ouverture
+echo "Le magasin est ouvert de ";
+foreach ($creneaux as $k => $creneau) {
+    if ($k > 0) {
+        echo " et de ";
+    }
+    echo "{$creneau[0]}h à {$creneau[1]}h";
+}
+
+// Vérification pour une heure donnée
+$heure = (int)readline("À quelle heure voulez-vous visiter le magasin ? ");
+$creneauTrouve = false;
+
+foreach ($creneaux as $creneau) {
+    if ($heure >= $creneau[0] && $heure <= $creneau[1]) {
+        $creneauTrouve = true;
+        break;
+    }
+}
+
+if ($creneauTrouve) {
+    echo "Le magasin sera ouvert";
+} else {
+    echo "Désolé, le magasin sera fermé";
+}
+</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Évitez les boucles infinies en vous assurant qu'il existe une condition de sortie</li>
+                <li>Utilisez <code>foreach</code> plutôt que <code>for</code> pour parcourir des tableaux</li>
+                <li>Préférez <code>break</code> à des conditions complexes pour sortir d'une boucle</li>
+                <li>Convertissez les entrées utilisateur avec <code>(int)</code>, <code>(float)</code> ou <code>(string)</code></li>
+                <li>Utilisez l'opérateur <code>+=</code> ou <code>-=</code> pour incrémenter/décrémenter d'une valeur spécifique</li>
+                <li>Pour les boucles imbriquées, maintenez une indentation claire pour la lisibilité</li>
+                <li>Évitez d'utiliser des noms de variables qui pourraient entrer en conflit avec des variables existantes</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

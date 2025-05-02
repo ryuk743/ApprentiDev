@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title> PHP - Installation sur Windows</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Guide d'installation de PHP</h1>
+        <p>Un tutoriel complet pour configurer PHP sur votre système Windows</p>
+    </header>
+
+    <main>
+        <h1>Installation de PHP sur Windows</h1>
+
+        <h2>1. Télécharger PHP</h2>
+        <p>
+            Rendez-vous sur le site officiel de PHP : <a href="https://www.php.net">php.net</a>.<br>
+            Cliquez sur "Downloads" puis sur "Windows downloads".<br>
+            Choisissez la version correspondant à votre système (64 bits ou 32 bits).<br>
+            Prenez de préférence la version <strong>Non Thread Safe</strong> si vous débutez. Cliquez pour télécharger le fichier .zip.
+        </p>
+
+        <h2>2. Extraire les fichiers</h2>
+        <p>
+            Une fois le fichier téléchargé, extrayez-le dans un dossier sur votre disque (par exemple : <code>C:\php</code>).
+        </p>
+
+        <h2>3. Ajouter PHP aux variables d'environnement</h2>
+        <ol>
+            <li>Ouvrez le menu Démarrer, tapez "variables d'environnement" et ouvrez l'option correspondante.</li>
+            <li>Dans la section "Variables système", trouvez la variable <code>Path</code> et cliquez sur "Modifier".</li>
+            <li>Ajoutez le chemin du dossier où se trouve PHP (ex. : <code>C:\php</code>).</li>
+            <li>Cliquez sur "OK" pour enregistrer.</li>
+        </ol>
+
+        <h2>4. Vérifier l'installation</h2>
+        <p>
+            Ouvrez l'invite de commande (CMD) et tapez la commande suivante :
+        </p>
+        <pre>php -v</pre>
+        <p>
+            Si PHP est installé, la version s'affichera. Sinon, un message d'erreur concernant une DLL manquante peut apparaître.
+        </p>
+
+        <h2>5. Installer Visual C++ Redistributable</h2>
+        <p>
+            Si une erreur du type "MSVCR140.dll is missing" s'affiche, cela signifie qu'il faut installer le <strong>Visual C++ Redistributable</strong>.<br>
+            Téléchargez-le depuis le site de Microsoft : <a href="https://learn.microsoft.com/fr-fr/cpp/windows/latest-supported-vc-redist">Télécharger Visual C++ Redistributable</a><br>
+            Installez la version correspondant à votre système (x64 ou x86), puis redémarrez le terminal.
+        </p>
+
+        <h2>6. Utiliser PHP</h2>
+        <p>
+            Une fois PHP installé, vous pouvez commencer à créer et exécuter des fichiers <code>.php</code> depuis votre terminal.
+        </p>
+        <p>
+            <strong>Astuce :</strong> Pour tester rapidement PHP, créez un fichier test.php avec le code suivant :
+        </p>
+        <pre>&lt;?php
+phpinfo();
+?&gt;</pre>
+        <p>
+            Exécutez-le avec la commande <code>php test.php</code> pour voir toutes les informations sur votre installation PHP.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

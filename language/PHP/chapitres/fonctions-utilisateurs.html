@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Création de fonctions</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Créer ses propres fonctions en PHP</h1>
+        <p>Organiser et réutiliser son code efficacement</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Déclaration de fonctions</h2>
+            <p>Pour créer une fonction en PHP, on utilise le mot-clé <code>function</code> suivi du nom de la fonction.</p>
+            
+            <pre>
+// Syntaxe de base
+function nomFonction($param1, $param2) {
+    // Code à exécuter
+    return $resultat;
+}
+
+// Exemple simple
+function bonjour($nom = null) {
+    if ($nom === null) {
+        return "Bonjour";
+    }
+    return "Bonjour $nom";
+}
+
+echo bonjour();      // "Bonjour"
+echo bonjour("Jean"); // "Bonjour Jean"
+</pre>
+        </section>
+
+        <section>
+            <h2>Portée des variables</h2>
+            <p>Les variables définies dans une fonction ne sont accessibles qu'à l'intérieur de celle-ci.</p>
+            
+            <pre>
+$variableExterne = "Test";
+
+function afficherVariable() {
+    // Cette ligne provoquerait une erreur
+    // echo $variableExterne;
+    
+    // Pour accéder à la variable externe (déconseillé)
+    global $variableExterne;
+    echo $variableExterne;
+}
+
+afficherVariable(); // "Test"
+</pre>
+        </section>
+
+        <section>
+            <h2>Typage des paramètres et retours</h2>
+            <p>Depuis PHP 7, on peut spécifier les types des paramètres et de la valeur de retour.</p>
+            
+            <pre>
+// Avec typage strict
+declare(strict_types=1);
+
+function addition(int $a, int $b): int {
+    return $a + $b;
+}
+
+// Sans conversion implicite
+echo addition(5, 3); // 8
+// echo addition(5.2, 3); // Erreur avec strict_types=1
+</pre>
+
+            <p>Le point d'interrogation permet d'indiquer qu'un paramètre ou retour peut être null :</p>
+            <pre>
+function trouverUtilisateur(?int $id): ?string {
+    if ($id === null) return null;
+    return "Utilisateur $id";
+}
+</pre>
+        </section>
+
+        <section>
+            <h2>Fonctions utilitaires</h2>
+            
+            <article>
+                <h3>Fonction de confirmation</h3>
+                <p>Une fonction qui demande une confirmation à l'utilisateur :</p>
+                <pre>
+function repondreOuiNon(string $question): bool {
+    while (true) {
+        $reponse = strtolower(readline("$question (o/n) : "));
+        if ($reponse === 'o') return true;
+        if ($reponse === 'n') return false;
+        echo "Répondez par 'o' ou 'n'\n";
+    }
+}
+
+$continuer = repondreOuiNon("Voulez-vous continuer ?");
+</pre>
+            </article>
+
+            <article>
+                <h3>Fonction de saisie de créneau</h3>
+                <p>Une fonction pour saisir un créneau horaire :</p>
+                <pre>
+function demanderCreneau(string $message = "Veuillez entrer un créneau"): array {
+    while (true) {
+        $ouverture = (int)readline("$message - Heure d'ouverture : ");
+        if ($ouverture >= 0 && $ouverture <= 23) break;
+    }
+    
+    while (true) {
+        $fermeture = (int)readline("$message - Heure de fermeture : ");
+        if ($fermeture >= 0 && $fermeture <= 23 && $fermeture > $ouverture) break;
+    }
+    
+    return [$ouverture, $fermeture];
+}
+
+$creneau = demanderCreneau();
+</pre>
+            </article>
+
+            <article>
+                <h3>Fonction qui utilise d'autres fonctions</h3>
+                <p>Une fonction plus complexe qui utilise nos fonctions utilitaires :</p>
+                <pre>
+function demanderCreneaux(): array {
+    $creneaux = [];
+    do {
+        $creneaux[] = demanderCreneau();
+        $continuer = repondreOuiNon("Voulez-vous ajouter un autre créneau ?");
+    } while ($continuer);
+    
+    return $creneaux;
+}
+
+$horaires = demanderCreneaux();
+</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Donnez des noms explicites à vos fonctions</li>
+                <li>Une fonction doit faire une seule chose</li>
+                <li>Limitez la taille de vos fonctions (10-15 lignes max)</li>
+                <li>Utilisez le typage pour plus de clarté</li>
+                <li>Évitez les effets de bord (modification de variables globales)</li>
+                <li>Documentez vos fonctions avec des commentaires</li>
+                <li>Privilégiez les petits paramètres (3-4 max)</li>
+                <li>Utilisez des valeurs par défaut pour les paramètres optionnels</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            
+            <article>
+                <h3>Exercice 1 : Calculatrice</h3>
+                <p>Créer une fonction <code>calculer</code> qui prend deux nombres et une opération (+, -, *, /) et retourne le résultat.</p>
+                <pre>
+function calculer(float $a, float $b, string $operation): float {
+    switch ($operation) {
+        case '+': return $a + $b;
+        case '-': return $a - $b;
+        case '*': return $a * $b;
+        case '/': 
+            if ($b == 0) throw new Exception("Division par zéro");
+            return $a / $b;
+        default: throw new Exception("Opération invalide");
+    }
+}
+</pre>
+            </article>
+
+            <article>
+                <h3>Exercice 2 : Filtre de mots</h3>
+                <p>Créer une fonction qui filtre les mots interdits dans une phrase.</p>
+                <pre>
+function filtrerMots(string $phrase, array $motsInterdits): string {
+    foreach ($motsInterdits as $mot) {
+        $taille = strlen($mot);
+        $remplacement = str_repeat('*', $taille);
+        $phrase = str_ireplace($mot, $remplacement, $phrase);
+    }
+    return $phrase;
+}
+</pre>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

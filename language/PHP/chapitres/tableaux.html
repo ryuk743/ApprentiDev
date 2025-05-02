@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Les Tableaux</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les Tableaux en PHP</h1>
+        <p>Organiser et manipuler des collections de données</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction aux tableaux</h2>
+            <p>Les tableaux (arrays) permettent de stocker plusieurs valeurs dans une seule variable. Ils sont essentiels lorsqu'on doit gérer des collections de données comme des listes de notes, des informations d'utilisateurs, etc.</p>
+            
+            <pre>
+// Problème avec plusieurs variables
+$note1 = 10;
+$note2 = 15;
+$note3 = 12;
+// ... devient ingérable avec beaucoup de notes
+
+// Solution : utiliser un tableau
+$notes = [10, 15, 12];</pre>
+        </section>
+
+        <section>
+            <h2>Création de tableaux</h2>
+            <p>Il existe deux syntaxes pour créer des tableaux :</p>
+            
+            <h3>1. Tableaux indexés (liste simple)</h3>
+            <pre>
+// Syntaxe moderne (recommandée)
+$notes = [10, 15, 12];
+
+// Ancienne syntaxe (toujours valable)
+$notes = array(10, 15, 12);</pre>
+
+            <h3>2. Tableaux associatifs</h3>
+            <pre>
+$eleve = [
+    'nom' => 'Dupont',
+    'prenom' => 'Marc',
+    'notes' => [10, 15, 12]
+];</pre>
+        </section>
+
+        <section>
+            <h2>Accès aux éléments</h2>
+            
+            <h3>Dans un tableau indexé</h3>
+            <pre>
+$notes = [10, 15, 12];
+echo $notes[1]; // Affiche 15 (index commence à 0)</pre>
+
+            <h3>Dans un tableau associatif</h3>
+            <pre>
+$eleve = ['nom' => 'Dupont', 'prenom' => 'Marc'];
+echo $eleve['prenom']; // Affiche "Marc"</pre>
+        </section>
+
+        <section>
+            <h2>Modification des tableaux</h2>
+            
+            <h3>Modifier une valeur existante</h3>
+            <pre>
+$eleve['prenom'] = 'Jean'; // Remplace 'Marc' par 'Jean'</pre>
+
+            <h3>Ajouter un élément</h3>
+            <pre>
+// Dans un tableau indexé
+$notes[] = 16; // Ajoute en fin de tableau
+
+// Dans un tableau associatif
+$eleve['classe'] = 'CM2'; // Ajoute une nouvelle clé</pre>
+        </section>
+
+        <section>
+            <h2>Tableaux multidimensionnels</h2>
+            <p>Un tableau peut contenir d'autres tableaux :</p>
+            
+            <pre>
+$classe = [
+    [
+        'nom' => 'Dupont',
+        'prenom' => 'Jean',
+        'notes' => [16, 12, 15]
+    ],
+    [
+        'nom' => 'Martin',
+        'prenom' => 'Sophie',
+        'notes' => [14, 18, 13]
+    ]
+];
+
+// Accès à la 2ème note du 1er élève
+echo $classe[0]['notes'][1]; // Affiche 12</pre>
+        </section>
+
+        <section>
+            <h2>Fonctions utiles pour les tableaux</h2>
+            
+            <ul>
+                <li><code>count($tableau)</code> - Nombre d'éléments</li>
+                <li><code>array_push($tableau, $valeur)</code> - Ajoute en fin</li>
+                <li><code>array_pop($tableau)</code> - Retire le dernier élément</li>
+                <li><code>array_merge($tab1, $tab2)</code> - Fusionne des tableaux</li>
+                <li><code>sort($tableau)</code> - Tri ascendant</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Affichage des tableaux</h2>
+            
+            <pre>
+// echo ne fonctionne pas bien pour les tableaux
+$notes = [10, 15, 12];
+echo $notes; // Affiche "Array"
+
+// Utiliser plutôt print_r() ou var_dump()
+echo '&lt;pre&gt;';
+print_r($notes);
+echo '&lt;/pre&gt;';
+
+// Affiche :
+// Array
+// (
+//     [0] => 10
+//     [1] => 15
+//     [2] => 12
+// )</pre>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            
+            <article>
+                <h3>Exercice 1 : Calcul de moyenne</h3>
+                <pre>
+$notes = [10, 15, 12];
+$moyenne = array_sum($notes) / count($notes);
+echo "Moyenne : " . round($moyenne, 2);</pre>
+            </article>
+
+            <article>
+                <h3>Exercice 2 : Gestion d'élèves</h3>
+                <pre>
+$eleves = [
+    ['nom' => 'Dupont', 'notes' => [10, 12]],
+    ['nom' => 'Martin', 'notes' => [15, 18]]
+];
+
+foreach ($eleves as $eleve) {
+    $moyenne = array_sum($eleve['notes']) / count($eleve['notes']);
+    echo $eleve['nom'] . " : " . round($moyenne, 1) . "&lt;br&gt;";
+}</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Utilisez la syntaxe courte <code>[]</code> plutôt que <code>array()</code></li>
+                <li>Nommez clairement vos clés associatives</li>
+                <li>Indentez correctement les tableaux multidimensionnels</li>
+                <li>Commentez les structures complexes</li>
+                <li>Vérifiez l'existence d'une clé avec <code>isset()</code> avant d'y accéder</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

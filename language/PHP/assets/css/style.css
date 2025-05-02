@@ -1,0 +1,114 @@
+:root {
+    --php-purple: #8892be;
+    --php-dark: #4F5B93;
+    --php-light: #E0E0F0;
+    --php-white: #ffffff;
+    --php-gray: #dcdcdc;
+    --php-blue: #5A69A6;
+    --header-bg: #4F5B93;
+    --header-text: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--php-light);
+    color: var(--php-dark);
+    margin: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: var(--header-text);
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-style: italic;
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+h1, h2 {
+    color: var(--php-purple);
+}
+
+h1 {
+    border-bottom: 2px solid var(--php-purple);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+h2 {
+    margin-top: 1.5rem;
+    padding-left: 0.5rem;
+    border-left: 4px solid var(--php-purple);
+}
+
+a {
+    color: var(--php-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--php-dark);
+}
+
+code, pre {
+    background-color: var(--php-gray);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+pre {
+    display: block;
+    padding: 1em;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    background-color: var(--php-white);
+    border-left: 4px solid var(--php-blue);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+strong {
+    color: var(--php-dark);
+    font-weight: 600;
+}
+
+ol, ul {
+    padding-left: 1.5rem;
+}
+
+ol li {
+    margin-bottom: 0.5em;
+    padding-left: 0.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--php-gray);
+    color: var(--php-dark);
+    font-size: 0.9rem;
+}

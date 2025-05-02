@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Les Fonctions</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les Fonctions en PHP</h1>
+        <p>Éviter la répétition et organiser son code</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction aux fonctions</h2>
+            <p>Les fonctions permettent d'effectuer une partie de logique et de renvoyer un résultat. Elles évitent la répétition et permettent d'effectuer des traitements spécifiques.</p>
+            
+            <pre>
+// Syntaxe de base
+function nomFonction($param1, $param2) {
+    // Code à exécuter
+    return $resultat;
+}
+
+// Exemple simple
+function addition($a, $b) {
+    return $a + $b;
+}
+
+$resultat = addition(5, 3); // Retourne 8
+</pre>
+        </section>
+
+        <section>
+            <h2>Utilisation des fonctions natives</h2>
+            <p>PHP propose de nombreuses fonctions natives pour diverses opérations :</p>
+            
+            <pre>
+// Fonctions pour les chaînes de caractères
+$longueur = strlen("Bonjour"); // 7
+$majuscules = strtoupper("bonjour"); // "BONJOUR"
+$inverse = strrev("hello"); // "olleh"
+
+// Fonctions pour les tableaux
+$somme = array_sum([1, 2, 3]); // 6
+$taille = count([10, 20, 30]); // 3
+</pre>
+
+            <p>La documentation PHP est essentielle pour découvrir les fonctions disponibles.</p>
+        </section>
+
+        <section>
+            <h2>Lecture de la documentation</h2>
+            <p>Chaque fonction est documentée avec :</p>
+            <ul>
+                <li>Sa signature (types des paramètres et valeur de retour)</li>
+                <li>Une description de son fonctionnement</li>
+                <li>Des exemples d'utilisation</li>
+                <li>Des notes spécifiques</li>
+            </ul>
+            
+            <pre>
+// Exemple avec strrev()
+string strrev ( string $string )
+// Prend une chaîne en paramètre
+// Retourne la chaîne inversée
+</pre>
+        </section>
+
+        <section>
+            <h2>Fonctions avec paramètres optionnels</h2>
+            <p>Certaines fonctions ont des paramètres entre crochets, indiquant qu'ils sont optionnels :</p>
+            
+            <pre>
+// Exemple avec round()
+float round ( float $val [, int $precision = 0 [, int $mode = PHP_ROUND_HALF_UP ]] )
+
+// Utilisations possibles :
+round(3.14159);       // 3
+round(3.14159, 2);    // 3.14
+</pre>
+        </section>
+
+        <section>
+            <h2>Fonctions mutables</h2>
+            <p>Certaines fonctions modifient leurs paramètres (passés par référence avec &) :</p>
+            
+            <pre>
+// Exemple avec sort()
+bool sort ( array &$array [, int $sort_flags = SORT_REGULAR ] )
+
+$nombres = [3, 1, 2];
+sort($nombres); // Modifie le tableau original
+// $nombres contient maintenant [1, 2, 3]
+</pre>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            
+            <article>
+                <h3>Exercice 1 : Vérification de palindrome</h3>
+                <p>Créer un programme qui vérifie si un mot est un palindrome.</p>
+                <pre>
+function estPalindrome($mot) {
+    $minuscules = strtolower($mot);
+    $inverse = strrev($minuscules);
+    return $minuscules === $inverse;
+}
+
+$mot = readline("Entrez un mot : ");
+if (estPalindrome($mot)) {
+    echo "Ce mot est un palindrome";
+} else {
+    echo "Ce mot n'est pas un palindrome";
+}
+</pre>
+            </article>
+
+            <article>
+                <h3>Exercice 2 : Calcul de moyenne</h3>
+                <p>Créer une fonction qui calcule la moyenne d'un tableau de notes.</p>
+                <pre>
+function calculerMoyenne($notes) {
+    if (empty($notes)) return 0;
+    $somme = array_sum($notes);
+    $count = count($notes);
+    return round($somme / $count, 2);
+}
+
+$notes = [10, 15, 16];
+echo "Moyenne : " . calculerMoyenne($notes); // 13.67
+</pre>
+            </article>
+
+            <article>
+                <h3>Exercice 3 : Filtre à insultes</h3>
+                <p>Créer une fonction qui filtre les insultes dans une phrase.</p>
+                <pre>
+function filtrerInsultes($phrase, $insultes) {
+    foreach ($insultes as $insulte) {
+        $taille = strlen($insulte);
+        $remplacement = str_repeat('*', $taille);
+        $phrase = str_ireplace($insulte, $remplacement, $phrase);
+    }
+    return $phrase;
+}
+
+$insultes = ["merde", "con"];
+$phrase = readline("Entrez une phrase : ");
+echo filtrerInsultes($phrase, $insultes);
+</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Nommez vos fonctions de manière descriptive</li>
+                <li>Documentez vos fonctions avec des commentaires</li>
+                <li>Limitez la taille de vos fonctions (une fonction = une tâche)</li>
+                <li>Utilisez des paramètres avec des valeurs par défaut pour les options</li>
+                <li>Vérifiez les types des paramètres si nécessaire</li>
+                <li>Gérez les cas d'erreur avec des exceptions ou des valeurs de retour spécifiques</li>
+                <li>Évitez les effets de bord (modification de variables globales)</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP et le Web</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .code-comparison {
+            display: flex;
+            margin: 20px 0;
+        }
+        .code-block {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .best-practice {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PHP pour le développement web</h1>
+        <p>Création de pages dynamiques avec PHP</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction au PHP web</h2>
+            <p>Contrairement à l'utilisation en ligne de commande, PHP pour le web permet de générer des pages HTML dynamiques qui s'adaptent au contexte.</p>
+            
+            <div class="best-practice">
+                <h3>Bonnes pratiques immédiates</h3>
+                <ul>
+                    <li>Utiliser un serveur local pour le développement (<code>php -S localhost:8000</code>)</li>
+                    <li>Séparer clairement la logique (PHP) et la présentation (HTML)</li>
+                    <li>Organiser son projet en fichiers modulaires</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Structure de base d'un projet</h2>
+            
+            <pre>
+mon-projet/
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── includes/
+│   ├── header.php
+│   ├── footer.php
+│   └── functions.php
+├── pages/
+│   ├── index.php
+│   └── contact.php
+└── templates/
+    ├── menu.php
+    └── components/
+</pre>
+
+            <article>
+                <h3>Exemple de header.php</h3>
+                <pre>
+&lt;?php declare(strict_types=1); ?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;&lt;?= $title ?? 'Mon Site' ?&gt;&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Techniques avancées d'intégration</h2>
+            
+            <article>
+                <h3>1. Variables partagées entre templates</h3>
+                <div class="code-comparison">
+                    <div class="code-block">
+                        <h4>Avant</h4>
+                        <pre>
+// index.php
+$title = "Accueil";
+include 'includes/header.php';
+// ...
+</pre>
+                    </div>
+                    <div class="code-block">
+                        <h4>Après</h4>
+                        <pre>
+// functions.php
+function render_header(string $title = '') {
+    $GLOBALS['page_title'] = $title;
+    include 'includes/header.php';
+}
+
+// index.php
+render_header("Accueil");
+</pre>
+                    </div>
+                </div>
+            </article>
+
+            <article>
+                <h3>2. Système de navigation dynamique</h3>
+                <pre>
+// functions.php
+function nav_item(string $lien, string $titre, string $linkClass = ''): string {
+    $classe = 'nav-item';
+    if ($_SERVER['SCRIPT_NAME'] === $lien) {
+        $classe .= ' active';
+    }
+    return <<&lt;HTML
+        &lt;li class="$classe"&gt;
+            &lt;a class="$linkClass" href="$lien"&gt;$titre&lt;/a&gt;
+        &lt;/li&gt;
+    HTML;
+}
+
+// Utilisation dans menu.php
+echo nav_item('/index.php', 'Accueil', 'nav-link');
+echo nav_item('/contact.php', 'Contact', 'nav-link');
+</pre>
+            </article>
+
+            <article>
+                <h3>3. Héritage de templates</h3>
+                <pre>
+// layout.php
+&lt;?php 
+function content(string $content): void {
+    include "includes/header.php";
+    echo $content;
+    include "includes/footer.php";
+}
+?&gt;
+
+// page.php
+&lt;?php 
+ob_start(); // Démarre la temporisation
+?&gt;
+&lt;h1&gt;Contenu spécifique&lt;/h1&gt;
+&lt;?php 
+content(ob_get_clean()); // Passe le contenu tamponné
+?&gt;
+</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques avancées</h2>
+            
+            <div class="best-practice">
+                <h3>Sécurité</h3>
+                <ul>
+                    <li>Toujours échapper les sorties avec <code>htmlspecialchars()</code></li>
+                    <li>Ne jamais faire confiance aux données utilisateur (<code>$_GET</code>, <code>$_POST</code>)</li>
+                    <li>Utiliser des chemins absolus avec <code>__DIR__</code></li>
+                </ul>
+            </div>
+
+            <div class="best-practice">
+                <h3>Performance</h3>
+                <ul>
+                    <li>Minimiser les inclusions avec <code>require_once</code></li>
+                    <li>Utiliser le cache OPcache en production</li>
+                    <li>Préférer les opérations en mémoire aux fichiers temporaires</li>
+                </ul>
+            </div>
+
+            <div class="best-practice">
+                <h3>Maintenabilité</h3>
+                <ul>
+                    <li>Documenter chaque fonction avec PHPDoc</li>
+                    <li>Utiliser des constantes pour les chemins et URLs</li>
+                    <li>Séparer les templates complexes en sous-composants</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Exercice pratique</h2>
+            
+            <article>
+                <h3>Système de templates avancé</h3>
+                <p>Créer un système de templates avec :</p>
+                <ol>
+                    <li>Un layout principal avec header/footer</li>
+                    <li>Des sections dynamiques (contenu principal, sidebar)</li>
+                    <li>Un système de composants réutilisables</li>
+                </ol>
+
+                <pre>
+// functions.php
+function view(string $path, array $variables = []): void {
+    extract($variables);
+    ob_start();
+    require "templates/{$path}.php";
+    $content = ob_get_clean();
+    require 'templates/layout.php';
+}
+
+// Utilisation
+view('home', ['title' => 'Accueil', 'posts' => $posts]);
+</pre>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide avancé PHP &copy; 2025 | <a href="https://www.php.net/manual/fr/" target="_blank">Documentation officielle</a></p>
+    </footer>
+</body>
+</html>

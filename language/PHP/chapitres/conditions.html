@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Les Conditions</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les Conditions en PHP</h1>
+        <p>Prendre des décisions dans votre code</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction aux conditions</h2>
+            <p>Les conditions permettent d'exécuter du code seulement si certaines conditions sont remplies. Elles sont essentielles pour créer une logique dans vos programmes.</p>
+            
+            <pre>
+// Exemple basique
+$note = 12;
+if ($note >= 10) {
+    echo "Bravo, vous avez la moyenne !";
+} else {
+    echo "Dommage, vous n'avez pas la moyenne.";
+}</pre>
+        </section>
+
+        <section>
+            <h2>Structure de base</h2>
+            
+            <h3>1. La condition simple (if/else)</h3>
+            <pre>
+if (condition) {
+    // Code exécuté si la condition est vraie
+} else {
+    // Code exécuté si la condition est fausse
+}</pre>
+
+            <h3>2. Conditions multiples (elseif)</h3>
+            <pre>
+if ($note > 10) {
+    echo "Au-dessus de la moyenne";
+} elseif ($note == 10) {
+    echo "Juste la moyenne";
+} else {
+    echo "En dessous de la moyenne";
+}</pre>
+        </section>
+
+        <section>
+            <h2>Opérateurs de comparaison</h2>
+            
+            <table>
+                <tr>
+                    <th>Opérateur</th>
+                    <th>Description</th>
+                    <th>Exemple</th>
+                </tr>
+                <tr>
+                    <td><code>==</code></td>
+                    <td>Égal à (valeur)</td>
+                    <td><code>$a == $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>===</code></td>
+                    <td>Identique (valeur et type)</td>
+                    <td><code>$a === $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>!=</code></td>
+                    <td>Différent (valeur)</td>
+                    <td><code>$a != $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>!==</code></td>
+                    <td>Non identique (valeur ou type)</td>
+                    <td><code>$a !== $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>&lt;</code></td>
+                    <td>Inférieur à</td>
+                    <td><code>$a &lt; $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>&gt;</code></td>
+                    <td>Supérieur à</td>
+                    <td><code>$a &gt; $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>&lt;=</code></td>
+                    <td>Inférieur ou égal</td>
+                    <td><code>$a &lt;= $b</code></td>
+                </tr>
+                <tr>
+                    <td><code>&gt;=</code></td>
+                    <td>Supérieur ou égal</td>
+                    <td><code>$a &gt;= $b</code></td>
+                </tr>
+            </table>
+            
+            <p><strong>Important :</strong> Préférez <code>===</code> et <code>!==</code> pour éviter les conversions implicites.</p>
+        </section>
+
+        <section>
+            <h2>Opérateurs logiques</h2>
+            
+            <h3>ET logique (&& ou and)</h3>
+            <pre>
+// Le magasin est ouvert entre 9h-12h ET 14h-17h
+if (($heure >= 9 && $heure <= 12) || ($heure >= 14 && $heure <= 17)) {
+    echo "Le magasin est ouvert";
+}</pre>
+
+            <h3>OU logique (|| ou or)</h3>
+            <pre>
+// Action utilisateur : 1 (attaque), 2 (défense) ou 3 (passe)
+if ($action == 1 || $action == 2 || $action == 3) {
+    // Action valide
+}</pre>
+
+            <h3>NON logique (!)</h3>
+            <pre>
+if (!isset($variable)) {
+    // La variable n'existe pas
+}</pre>
+        </section>
+
+        <section>
+            <h2>Structure switch</h2>
+            <p>Alternative aux multiples elseif quand on teste une même variable contre plusieurs valeurs.</p>
+            
+            <pre>
+switch ($action) {
+    case 1:
+        echo "J'attaque";
+        break;
+    case 2:
+        echo "Je défends";
+        break;
+    case 3:
+        echo "Je passe mon tour";
+        break;
+    default:
+        echo "Commande inconnue";
+}</pre>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            
+            <article>
+                <h3>Exercice 1 : Vérification d'âge</h3>
+                <pre>
+$age = (int)readline("Quel est votre âge ? ");
+if ($age >= 18) {
+    echo "Vous êtes majeur";
+} elseif ($age > 0) {
+    echo "Vous êtes mineur";
+} else {
+    echo "Âge invalide";
+}</pre>
+            </article>
+
+            <article>
+                <h3>Exercice 2 : Horaires d'ouverture</h3>
+                <pre>
+$heure = (int)readline("Quelle heure est-il ? ");
+if (($heure >= 9 && $heure < 12) || ($heure >= 14 && $heure < 17)) {
+    echo "Le magasin est ouvert";
+} else {
+    echo "Le magasin est fermé";
+}</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Utilisez <code>===</code> plutôt que <code>==</code> sauf besoin spécifique</li>
+                <li>Convertissez les entrées utilisateur avec <code>(int)</code>, <code>(float)</code> ou <code>(string)</code></li>
+                <li>Privilégiez la lisibilité avec une indentation claire</li>
+                <li>Utilisez des parenthèses pour clarifier les opérations complexes</li>
+                <li>Préférez <code>switch</code> pour tester une variable contre plusieurs valeurs constantes</li>
+                <li>Commentez les conditions complexes</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>
