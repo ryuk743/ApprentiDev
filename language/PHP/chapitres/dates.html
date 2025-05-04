@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Constantes et Fonctions de Date</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .alert { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .alert-error { background-color: #f8d7da; color: #721c24; }
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .checkbox label, .radio label { display: inline-block; margin-left: 5px; }
+        .current-day { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Les Constantes et fonctions de date en  PHP</h1>
+        <p>Constantes et fonctions de date</p>
+    </header>
+
+    <div class="video-container">
+        <h2 class="video-title">Vidéo explicative</h2>
+        <a href="https://www.youtube.com/watch?v=HgIlzi6QzSc&list=PLjwdMgw5TTLVDv-ceONHM_C19dPW1MAMD" class="video-link">
+            Apprendre le PHP : Chapitre 14, Les dates
+        </a>
+    </div>
+
+    <main>
+        <h1>Utilisation des constantes et fonctions de date en PHP</h1>
+
+        <section>
+            <h2>Les constantes en PHP</h2>
+            <p>Les constantes sont des valeurs qui ne changent pas pendant l'exécution du script :</p>
+            
+            <pre>// Définition d'une constante
+define('CRENEAUX', [
+    [8, 12],
+    [14, 19]
+]);
+
+// Utilisation
+$creneaux = CRENEAUX; // Pas de $ devant le nom</pre>
+
+            <h3>Avantages des constantes :</h3>
+            <ul>
+                <li>Valeurs immuables pendant l'exécution</li>
+                <li>Meilleure organisation du code</li>
+                <li>Convention de nommage en MAJUSCULES</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Fonctions de date en PHP</h2>
+            
+            <h3>Fonction date()</h3>
+            <pre>// Définir le fuseau horaire (important !)
+date_default_timezone_set('Europe/Paris');
+
+// Récupérer la date actuelle
+echo date('d/m/Y H:i:s'); // 10/12/2023 14:30:45</pre>
+
+            <h3>Formatage des dates</h3>
+            <pre>// Jour de la semaine (1=lundi, 7=dimanche)
+$jourSemaine = date('N');
+
+// Heure actuelle (0-23)
+$heure = date('G');
+
+// Date complète en français
+setlocale(LC_TIME, 'fr_FR.utf8');
+echo strftime('%A %d %B %Y'); // lundi 10 décembre 2023</pre>
+        </section>
+
+        <section>
+            <h2>Exemple complet : Horaires d'ouverture</h2>
+            
+            <article>
+                <h3>Fichier config.php</h3>
+                <pre>&lt;?php
+// Constantes pour les jours et horaires
+define('JOURS', [
+    'Lundi',
+    'Mardi',
+    'Mercredi',
+    'Jeudi',
+    'Vendredi',
+    'Samedi',
+    'Dimanche'
+]);
+
+define('CRENEAUX', [
+    // Lundi
+    [
+        [8, 12],
+        [14, 19]
+    ],
+    // Mardi
+    [
+        [8, 12],
+        [14, 19]
+    ],
+    // Mercredi
+    [
+        [8, 12]
+    ],
+    // Jeudi
+    [
+        [8, 12],
+        [14, 19]
+    ],
+    // Vendredi
+    [
+        [8, 12],
+        [14, 19]
+    ],
+    // Samedi
+    [],
+    // Dimanche
+    []
+]);
+?&gt;</pre>
+            </article>
+            
+            <article>
+                <h3>Fonction pour afficher les horaires</h3>
+                <pre>function creneaux_html(array $creneaux) {
+    if (empty($creneaux)) {
+        return 'Fermé';
+    }
+    
+    $phrases = [];
+    foreach ($creneaux as $creneau) {
+        $phrases[] = "de {$creneau[0]}h à {$creneau[1]}h";
+    }
+    
+    return implode(' et ', $phrases);
+}
+
+// Utilisation
+echo creneaux_html(CRENEAUX[0]); // Affiche les horaires du lundi</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Vérifier si le magasin est ouvert</h2>
+            
+            <pre>&lt;?php
+function in_creneaux(int $heure, array $creneaux): bool
+{
+    foreach ($creneaux as $creneau) {
+        $debut = $creneau[0];
+        $fin = $creneau[1];
+        
+        if ($heure >= $debut && $heure < $fin) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Utilisation
+$heure = (int)date('G');
+$jour = date('N') - 1; // 0=lundi, 6=dimanche
+$ouvert = in_creneaux($heure, CRENEAUX[$jour]);
+?&gt;
+
+&lt;?php if ($ouvert): ?&gt;
+    &lt;div class="alert alert-success"&gt;Le magasin est ouvert&lt;/div&gt;
+&lt;?php else: ?&gt;
+    &lt;div class="alert alert-error"&gt;Le magasin est fermé&lt;/div&gt;
+&lt;?php endif; ?&gt;</pre>
+        </section>
+
+        <section>
+            <h2>Formulaire de vérification des horaires</h2>
+            
+            <pre>&lt;form action="" method="get"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Jour :&lt;/label&gt;
+        &lt;select name="jour" class="form-control"&gt;
+            &lt;?php foreach (JOURS as $k => $jour): ?&gt;
+                &lt;option value="&lt;?= $k ?&gt;" &lt;?= ($k == ($_GET['jour'] ?? date('N')-1)) ? 'selected' : '' ?&gt;&gt;
+                    &lt;?= $jour ?&gt;
+                &lt;/option&gt;
+            &lt;?php endforeach; ?&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Heure :&lt;/label&gt;
+        &lt;input type="number" name="heure" value="&lt;?= $_GET['heure'] ?? date('G') ?&gt;" class="form-control"&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Vérifier&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php
+if (isset($_GET['jour'], $_GET['heure'])) {
+    $jour = (int)$_GET['jour'];
+    $heure = (int)$_GET['heure'];
+    $ouvert = in_creneaux($heure, CRENEAUX[$jour]);
+    
+    echo "&lt;div class='alert alert-" . ($ouvert ? 'success' : 'error') . "'&gt;";
+    echo "Le magasin " . ($ouvert ? "est ouvert" : "est fermé") . " le " . JOURS[$jour] . " à {$heure}h";
+    echo "&lt;/div&gt;";
+}
+?&gt;</pre>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Toujours définir le fuseau horaire avec <code>date_default_timezone_set()</code></li>
+                <li>Utiliser des constantes pour les valeurs fixes</li>
+                <li>Valider et filtrer les entrées utilisateur</li>
+                <li>Utiliser <code>empty()</code> pour vérifier si un tableau est vide</li>
+                <li>Documenter vos fonctions avec des types de paramètres et de retour</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

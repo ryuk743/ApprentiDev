@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Traitement des formulaires</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .alert { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .alert-error { background-color: #f8d7da; color: #721c24; }
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .checkbox label, .radio label { display: inline-block; margin-left: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Les fondamentaux de PHP</h1>
+        <p>Traitement des formulaires et interactions utilisateur</p>
+    </header>
+
+    <div class="video-container">
+        <h2 class="video-title">Vidéo explicative</h2>
+        <a href="https://www.youtube.com/watch?v=pcunj2FI_-c&list=PLjwdMgw5TTLVDv-ceONHM_C19dPW1MAMD" class="video-link">
+            Apprendre le PHP : Chapitre 13, Traitement des formulaires
+        </a>
+    </div>
+    
+
+    <main>
+        <h1>Traitement des formulaires en PHP</h1>
+
+        <section>
+            <h2>Création d'un formulaire de base</h2>
+            <p>Pour interagir avec l'utilisateur, on utilise des formulaires HTML :</p>
+            <pre>&lt;form action="traitement.php" method="post"&gt;
+    &lt;input type="text" name="nom" placeholder="Votre nom"&gt;
+    &lt;button type="submit"&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;</pre>
+            
+            <h3>Attributs importants :</h3>
+            <ul>
+                <li><strong>action</strong> : La page qui traitera le formulaire (vide = même page)</li>
+                <li><strong>method</strong> : "get" (par défaut) ou "post"</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Récupération des données</h2>
+            <p>PHP fournit deux variables superglobales pour récupérer les données :</p>
+            
+            <h3>Avec la méthode GET</h3>
+            <pre>// Les données sont visibles dans l'URL
+// Exemple: page.php?nom=Jean&amp;age=25
+$nom = $_GET['nom'];</pre>
+            
+            <h3>Avec la méthode POST</h3>
+            <pre>// Les données sont envoyées dans le corps de la requête
+$nom = $_POST['nom'];</pre>
+            
+            <h3>Bonnes pratiques</h3>
+            <pre>// Toujours vérifier si le champ existe avant de l'utiliser
+if (isset($_POST['nom'])) {
+    $nom = htmlspecialchars($_POST['nom']); // Protection contre les injections
+}</pre>
+        </section>
+
+        <section>
+            <h2>Exemple complet : Jeu de devinette</h2>
+            
+            <article>
+                <h3>Code PHP</h3>
+                <pre>&lt;?php
+// Initialisation
+$nombreADeviner = 150;
+$message = '';
+
+// Traitement du formulaire
+if (isset($_GET['chiffre'])) {
+    $chiffre = (int)$_GET['chiffre']; // Conversion en entier
+    
+    if ($chiffre > $nombreADeviner) {
+        $message = 'Votre chiffre est trop grand';
+    } elseif ($chiffre < $nombreADeviner) {
+        $message = 'Votre chiffre est trop petit';
+    } else {
+        $message = 'Bravo ! Vous avez deviné le chiffre ' . $nombreADeviner;
+    }
+}
+?&gt;
+
+&lt;!-- Formulaire --&gt;
+&lt;form action="" method="get"&gt;
+    &lt;input type="number" name="chiffre" 
+           value="&lt;?= isset($_GET['chiffre']) ? htmlspecialchars($_GET['chiffre']) : '' ?&gt;"
+           placeholder="Entre 0 et 1000"&gt;
+    &lt;button type="submit"&gt;Deviner&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php if ($message): ?&gt;
+    &lt;div class="alert"&gt;&lt;?= $message ?&gt;&lt;/div&gt;
+&lt;?php endif; ?&gt;</pre>
+            </article>
+            
+            <article>
+                <h3>Points clés</h3>
+                <ul>
+                    <li>Vérification de l'existence du paramètre avec <code>isset()</code></li>
+                    <li>Conversion du type avec <code>(int)</code></li>
+                    <li>Protection contre les injections avec <code>htmlspecialchars()</code></li>
+                    <li>Affichage conditionnel du message</li>
+                </ul>
+            </article>
+        </section>
+
+        <section>
+            <h2>Cas pratique : Composition de glace</h2>
+            
+            <article>
+                <h3>Configuration des options</h3>
+                <pre>&lt;?php
+// Tableaux de configuration
+$parfums = [
+    'fraise' => 4,
+    'chocolat' => 5,
+    'vanille' => 3
+];
+
+$cornets = [
+    'pot' => 2,
+    'cornet' => 3
+];
+
+$supplements = [
+    'pepites' => 1,
+    'chantilly' => 0.5
+];
+?&gt;</pre>
+            </article>
+            
+            <article>
+                <h3>Génération dynamique des champs</h3>
+                <pre>&lt;form action="" method="get"&gt;
+    &lt;h3&gt;Choisissez vos parfums&lt;/h3&gt;
+    &lt;?php foreach ($parfums as $parfum => $prix): ?&gt;
+        &lt;div class="checkbox"&gt;
+            &lt;label&gt;
+                &lt;input type="checkbox" name="parfum[]" value="&lt;?= $parfum ?&gt;"
+                       &lt;?= checkbox_checked('parfum', $parfum) ?&gt;&gt;
+                &lt;?= $parfum ?&gt; - &lt;?= $prix ?&gt;€
+            &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;?php endforeach; ?&gt;
+    
+    &lt;!-- Même principe pour cornets et supplements --&gt;
+    &lt;button type="submit"&gt;Composer ma glace&lt;/button&gt;
+&lt;/form&gt;</pre>
+                
+                <h4>Fonction helper</h4>
+                <pre>function checkbox_checked($name, $value) {
+    if (isset($_GET[$name])) {
+        return in_array($value, $_GET[$name]) ? 'checked' : '';
+    }
+    return '';
+}</pre>
+            </article>
+            
+            <article>
+                <h3>Calcul du prix total</h3>
+                <pre>&lt;?php
+$ingredients = [];
+$total = 0;
+
+// Traitement des parfums
+if (isset($_GET['parfum'])) {
+    foreach ($_GET['parfum'] as $parfum) {
+        if (isset($parfums[$parfum])) {
+            $ingredients[] = $parfum;
+            $total += $parfums[$parfum];
+        }
+    }
+}
+
+// Traitement du cornet
+if (isset($_GET['cornet']) && isset($cornets[$_GET['cornet']])) {
+    $ingredients[] = $_GET['cornet'];
+    $total += $cornets[$_GET['cornet']];
+}
+
+// Traitement des supplements
+if (isset($_GET['supplement'])) {
+    foreach ($_GET['supplement'] as $supplement) {
+        if (isset($supplements[$supplement])) {
+            $ingredients[] = $supplement;
+            $total += $supplements[$supplement];
+        }
+    }
+}
+?&gt;
+
+&lt;!-- Affichage du récapitulatif --&gt;
+&lt;div class="card"&gt;
+    &lt;h4&gt;Votre glace&lt;/h4&gt;
+    &lt;ul&gt;
+        &lt;?php foreach ($ingredients as $ingredient): ?&gt;
+            &lt;li&gt;&lt;?= $ingredient ?&gt;&lt;/li&gt;
+        &lt;?php endforeach; ?&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;&lt;strong&gt;Prix total: &lt;?= $total ?&gt;€&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Différences GET vs POST</h2>
+            <table>
+                <tr>
+                    <th>Critère</th>
+                    <th>GET</th>
+                    <th>POST</th>
+                </tr>
+                <tr>
+                    <td>Visibilité des données</td>
+                    <td>Dans l'URL</td>
+                    <td>Dans le corps de la requête</td>
+                </tr>
+                <tr>
+                    <td>Taille limitée</td>
+                    <td>Oui (~2000 caractères)</td>
+                    <td>Non (théoriquement illimitée)</td>
+                </tr>
+                <tr>
+                    <td>Type de requête</td>
+                    <td>Idempotente (lecture)</td>
+                    <td>Non idempotente (modification)</td>
+                </tr>
+                <tr>
+                    <td>Cas d'usage</td>
+                    <td>Recherches, filtres, partage d'URL</td>
+                    <td>Connexions, envois de données sensibles</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Sécurité des formulaires</h2>
+            <ul>
+                <li><strong>Validation</strong> : Vérifiez toujours le type et le format des données</li>
+                <li><strong>Nettoyage</strong> : Utilisez <code>htmlspecialchars()</code> pour l'affichage</li>
+                <li><strong>Protection CSRF</strong> : Utilisez des tokens pour les formulaires sensibles</li>
+                <li><strong>Never trust user input</strong> : Considérez toutes les données comme potentiellement dangereuses</li>
+            </ul>
+            
+            <h3>Exemple de protection</h3>
+            <pre>// Validation d'un email
+if (isset($_POST['email'])) {
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Email valide
+    } else {
+        // Gestion de l'erreur
+    }
+}</pre>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Séparez la logique (PHP) de la présentation (HTML)</li>
+                <li>Utilisez des fonctions helpers pour générer les champs répétitifs</li>
+                <li>Préférez POST pour les formulaires modifiant des données</li>
+                <li>Donnez un feedback clair à l'utilisateur après soumission</li>
+                <li>Utilisez des labels et des attributs ARIA pour l'accessibilité</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>

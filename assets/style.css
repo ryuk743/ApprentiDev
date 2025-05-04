@@ -1,2 +1,59 @@
 ul {display: flex;
     flex-direction: column;}
+
+    /* Styles globaux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Conteneur de la vidéo */
+.video-container {
+    background-color: #ff0000;  /* Rouge */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Titre de la vidéo */
+.video-title {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Lien vers la vidéo avec style */
+.video-link {
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du lien */
+.video-link:hover {
+    background-color: #ff5555;  /* Couleur rouge plus claire */
+}
+
+/* Icône YouTube */
+.video-link i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+/* Ajout de style pour le logo YouTube avec FontAwesome */
+.fab.fa-youtube {
+    color: white;
+}
