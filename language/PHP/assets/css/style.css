@@ -36,55 +36,68 @@
 
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: var(--php-light);
+    background: linear-gradient(120deg, #e0e0f0 0%, #f9f9ff 100%);
     color: var(--php-dark);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    letter-spacing: 0.01em;
 }
 
 /* Typographie */
 h1, h2, h3, h4 {
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     margin-bottom: var(--space-sm);
+    letter-spacing: 0.02em;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--header-text);
     margin-bottom: var(--space-xs);
+    text-shadow: 0 2px 8px rgba(76, 90, 147, 0.15);
+    letter-spacing: 0.04em;
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--php-purple);
     position: relative;
     padding-left: var(--space-sm);
     margin: var(--space-lg) 0 var(--space-md);
+    text-shadow: 0 1px 4px rgba(136,146,190,0.08);
 }
 
 h2::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--php-purple);
-    border-radius: var(--radius-sm);
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 5px;
+    background: linear-gradient(180deg, var(--php-purple), var(--php-blue));
+    border-radius: var(--radius-lg);
+}
+
+h3 {
+    font-size: 1.25rem;
+    color: var(--php-blue);
+    margin-bottom: 0.5em;
+    letter-spacing: 0.03em;
 }
 
 /* En-tête */
 header {
-    background-color: var(--header-bg);
+    background: linear-gradient(90deg, var(--header-bg) 60%, var(--php-blue) 100%);
     color: var(--header-text);
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-xl) var(--space-md) var(--space-lg) var(--space-md);
     text-align: center;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgba(76, 90, 147, 0.10);
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 32px 32px;
 }
 
 header::after {
@@ -93,23 +106,102 @@ header::after {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 6px;
     background: linear-gradient(90deg, var(--php-purple), var(--php-blue));
+    border-radius: 0 0 16px 16px;
 }
 
 header p {
     margin-top: var(--space-xs);
     font-style: italic;
-    opacity: 0.9;
+    opacity: 0.95;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
 }
 
 /* Contenu principal */
 main {
-    max-width: 900px;
+    max-width: 1000px;
     width: 100%;
     margin: var(--space-xl) auto;
     padding: 0 var(--space-md);
     flex: 1;
+}
+
+/* Cartes de chapitres */
+.chapters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.2rem;
+    margin-top: 2.5rem;
+}
+
+.chapter-card {
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    background: linear-gradient(120deg, #f9f9ff 60%, #e0e0f0 100%);
+    box-shadow: 0 4px 24px rgba(136,146,190,0.13), 0 1.5px 6px rgba(90,105,166,0.07);
+    transition: transform 0.22s cubic-bezier(.4,2,.6,1), box-shadow 0.22s;
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, var(--php-purple) 0%, transparent 70%);
+    opacity: 0.13;
+    z-index: 0;
+}
+
+.chapter-card:hover {
+    transform: translateY(-8px) scale(1.025);
+    box-shadow: 0 8px 32px rgba(90,105,166,0.18), 0 2px 8px rgba(76,90,147,0.10);
+    background: linear-gradient(120deg, #e0e0f0 60%, #f9f9ff 100%);
+}
+
+.chapter-card h3 {
+    margin-top: 0;
+    color: var(--php-blue);
+    z-index: 1;
+    position: relative;
+}
+
+.chapter-card p {
+    color: #555;
+    margin-bottom: 1.2em;
+    z-index: 1;
+    position: relative;
+    font-size: 1.05rem;
+}
+
+.chapter-card .btn {
+    display: inline-block;
+    padding: 0.7em 1.6em;
+    background: linear-gradient(90deg, var(--php-purple) 60%, var(--php-blue) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1.05rem;
+    box-shadow: 0 2px 8px rgba(136,146,190,0.10);
+    border: none;
+    transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    z-index: 1;
+    position: relative;
+}
+
+.chapter-card .btn:hover {
+    background: linear-gradient(90deg, var(--php-blue) 60%, var(--php-purple) 100%);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 4px 16px rgba(90,105,166,0.18);
 }
 
 /* Liens */
@@ -117,28 +209,14 @@ a {
     color: var(--php-blue);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.2s ease;
     position: relative;
+    transition: color 0.3s, transform 0.3s;
 }
 
 a:hover {
     color: var(--php-dark);
-    text-decoration: underline;
-}
-
-a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--php-dark);
-    transition: width 0.3s ease;
-}
-
-a:hover::after {
-    width: 100%;
+    transform: scale(1.05);
+    text-shadow: 0 1px 4px rgba(90,105,166,0.07);
 }
 
 /* Code */
@@ -147,7 +225,8 @@ code {
     padding: 0.2em 0.4em;
     border-radius: var(--radius-sm);
     font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 0.9em;
+    font-size: 0.98em;
+    color: var(--php-dark);
 }
 
 pre {
@@ -160,6 +239,7 @@ pre {
     margin: var(--space-md) 0;
     font-family: 'Fira Code', 'Courier New', monospace;
     line-height: 1.5;
+    font-size: 1.02em;
 }
 
 /* Listes */
@@ -171,6 +251,7 @@ ul, ol {
 li {
     margin-bottom: var(--space-xs);
     position: relative;
+    font-size: 1.04rem;
 }
 
 ul li::marker {
@@ -186,11 +267,11 @@ ul li::marker {
     margin: var(--space-md) auto;
     text-align: center;
     box-shadow: var(--shadow-md);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1);
 }
 
 .video-container:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.03);
 }
 
 .video-title {
@@ -209,13 +290,13 @@ ul li::marker {
     padding: var(--space-xs) var(--space-sm);
     border: 2px solid var(--php-white);
     border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(.4,2,.6,1);
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 .video-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
+    transform: scale(1.07);
 }
 
 .video-link i {
@@ -230,23 +311,40 @@ footer {
     margin-top: var(--space-xl);
     border-top: 1px solid var(--php-gray);
     color: var(--php-dark);
-    font-size: 0.9rem;
-    background-color: var(--php-white);
+    font-size: 1rem;
+    background: linear-gradient(90deg, #f9f9ff 60%, #e0e0f0 100%);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 -2px 8px rgba(136,146,190,0.07);
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+    main {
+        max-width: 98vw;
+        padding: 0 var(--space-xs);
+    }
+    .chapters {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    header {
+        padding: var(--space-lg) var(--space-xs);
+    }
+}
+
 @media (max-width: 768px) {
     :root {
         --space-md: 1rem;
         --space-lg: 1.5rem;
         --space-xl: 2rem;
     }
-    
     h1 {
         font-size: 2rem;
     }
-    
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+    .chapter-card {
+        padding: 1.2rem 0.8rem 1rem 0.8rem;
     }
 }

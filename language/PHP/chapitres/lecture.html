@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Lecture et écriture de fichiers</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Lecture et écriture de fichiers en PHP</h1>
+        <p>Manipuler des fichiers pour stocker et lire des données</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Bienvenue dans ce nouveau chapitre ! Nous allons découvrir comment écrire et lire un fichier en PHP.<br>
+                Les fonctions principales sont <code>file_put_contents</code> (écriture) et <code>file_get_contents</code> (lecture).
+            </p>
+        </section>
+
+        <section>
+            <h2>Écriture dans un fichier avec <code>file_put_contents</code></h2>
+            <pre>
+// Syntaxe de base
+file_put_contents($chemin, $donnees);
+
+// Exemple simple
+file_put_contents('demo.txt', "Salut les gens");
+
+// Si le fichier n'existe pas, il sera créé automatiquement.
+// Attention : le contenu précédent est écrasé.
+            </pre>
+            <p>
+                Pour ajouter du contenu à la fin du fichier sans l'écraser, utilisez le drapeau <code>FILE_APPEND</code> :
+            </p>
+            <pre>
+file_put_contents('demo.txt', "Nouvelle ligne", FILE_APPEND);
+            </pre>
+            <p>
+                Pour écrire dans un dossier spécifique, utilisez <code>__DIR__</code> et <code>DIRECTORY_SEPARATOR</code> :
+            </p>
+            <pre>
+$fichier = __DIR__ . DIRECTORY_SEPARATOR . 'demo.txt';
+file_put_contents($fichier, "Contenu");
+            </pre>
+        </section>
+
+        <section>
+            <h2>Lecture d'un fichier avec <code>file_get_contents</code></h2>
+            <pre>
+$contenu = file_get_contents('demo.txt');
+echo $contenu;
+            </pre>
+            <p>
+                <strong>Remarque :</strong> <code>file_get_contents</code> peut aussi lire une URL, mais ce n'est pas recommandé pour récupérer des pages web.
+            </p>
+        </section>
+
+        <section>
+            <h2>Lire un fichier ligne par ligne</h2>
+            <p>
+                Pour lire un fichier volumineux ou ligne par ligne, utilisez <code>fopen</code> et <code>fgets</code> :
+            </p>
+            <pre>
+$fichier = fopen('demo.txt', 'r');
+while ($ligne = fgets($fichier)) {
+    echo $ligne . "&lt;br&gt;";
+}
+fclose($fichier);
+            </pre>
+            <p>
+                <code>fopen</code> ouvre le fichier, <code>fgets</code> lit chaque ligne, <code>fclose</code> ferme le fichier.
+            </p>
+        </section>
+
+        <section>
+            <h2>Écrire dans un fichier avec <code>fwrite</code></h2>
+            <pre>
+$fichier = fopen('demo.txt', 'a'); // 'a' pour ajouter à la fin
+fwrite($fichier, "Nouvelle ligne\n");
+fclose($fichier);
+            </pre>
+        </section>
+
+        <section>
+            <h2>Gestion des erreurs</h2>
+            <pre>
+$taille = @file_put_contents('demo.txt', "Test");
+if ($taille === false) {
+    echo "Impossible d'écrire dans le fichier";
+} else {
+    echo "Écriture réussie";
+}
+            </pre>
+            <p>
+                Le <code>@</code> masque les erreurs, pensez à vérifier le retour de la fonction.
+            </p>
+        </section>
+
+        <section>
+            <h2>Lecture de fichiers CSV ou TSV</h2>
+            <pre>
+// Lecture d'un fichier CSV ligne par ligne
+$handle = fopen('menu.csv', 'r');
+while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+    print_r($data);
+}
+fclose($handle);
+            </pre>
+            <pre>
+// Lecture d'un fichier TSV (tabulation)
+$handle = fopen('menu.tsv', 'r');
+while (($data = fgetcsv($handle, 1000, "\t")) !== false) {
+    print_r($data);
+}
+fclose($handle);
+            </pre>
+        </section>
+
+        <section>
+            <h2>Exercices pratiques</h2>
+            <article>
+                <h3>Exercice 1 : Écrire et lire un fichier</h3>
+                <pre>
+file_put_contents('test.txt', "Bonjour PHP !");
+echo file_get_contents('test.txt');
+                </pre>
+            </article>
+            <article>
+                <h3>Exercice 2 : Lire un fichier ligne par ligne</h3>
+                <pre>
+$fichier = fopen('test.txt', 'r');
+while ($ligne = fgets($fichier)) {
+    echo $ligne . "&lt;br&gt;";
+}
+fclose($fichier);
+                </pre>
+            </article>
+            <article>
+                <h3>Exercice 3 : Lire un fichier CSV</h3>
+                <pre>
+$handle = fopen('menu.csv', 'r');
+while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+    echo $data[0] . " - " . $data[1] . "&lt;br&gt;";
+}
+fclose($handle);
+                </pre>
+            </article>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Utilisez <code>__DIR__</code> et <code>DIRECTORY_SEPARATOR</code> pour les chemins de fichiers</li>
+                <li>Vérifiez toujours le retour des fonctions d'écriture/lecture</li>
+                <li>Fermez vos fichiers avec <code>fclose()</code> après utilisation</li>
+                <li>Pour les gros fichiers, préférez <code>fopen</code> et <code>fgets</code></li>
+                <li>Pour les fichiers CSV, utilisez <code>fgetcsv</code></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>
