@@ -152,6 +152,123 @@ h2::before {
     box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
 }
 
+/* Couleurs spécifiques par langage/framework */
+.card-php {
+    background: linear-gradient(120deg, #8993be 60%, #4f5b93 100%);
+}
+.card-php a {
+    background: linear-gradient(90deg, #4f5b93 60%, #8993be 100%);
+}
+.card-php a:hover {
+    background: linear-gradient(90deg, #8993be 60%, #4f5b93 100%);
+}
+
+.card-js {
+    background: linear-gradient(120deg, #f7df1e 60%, #ffe873 100%);
+}
+.card-js a {
+    background: linear-gradient(90deg, #f7df1e 60%, #ffe873 100%);
+    color: #222;
+}
+.card-js a:hover {
+    background: linear-gradient(90deg, #ffe873 60%, #f7df1e 100%);
+    color: #222;
+}
+
+.card-python {
+    background: linear-gradient(120deg, #306998 60%, #ffd43b 100%);
+}
+.card-python a {
+    background: linear-gradient(90deg, #306998 60%, #ffd43b 100%);
+    color: #222;
+}
+.card-python a:hover {
+    background: linear-gradient(90deg, #ffd43b 60%, #306998 100%);
+    color: #222;
+}
+
+.card-java {
+    background: linear-gradient(120deg, #f89820 60%, #5382a1 100%);
+}
+.card-java a {
+    background: linear-gradient(90deg, #5382a1 60%, #f89820 100%);
+}
+.card-java a:hover {
+    background: linear-gradient(90deg, #f89820 60%, #5382a1 100%);
+}
+
+.card-csharp {
+    background: linear-gradient(120deg, #68217a 60%, #9b4f96 100%);
+}
+.card-csharp a {
+    background: linear-gradient(90deg, #68217a 60%, #9b4f96 100%);
+}
+.card-csharp a:hover {
+    background: linear-gradient(90deg, #9b4f96 60%, #68217a 100%);
+}
+
+.card-react {
+    background: linear-gradient(120deg, #61dafb 60%, #20232a 100%);
+}
+.card-react a {
+    background: linear-gradient(90deg, #20232a 60%, #61dafb 100%);
+    color: #fff;
+}
+.card-react a:hover {
+    background: linear-gradient(90deg, #61dafb 60%, #20232a 100%);
+    color: #fff;
+}
+
+.card-vue {
+    background: linear-gradient(120deg, #42b883 60%, #35495e 100%);
+}
+.card-vue a {
+    background: linear-gradient(90deg, #35495e 60%, #42b883 100%);
+}
+.card-vue a:hover {
+    background: linear-gradient(90deg, #42b883 60%, #35495e 100%);
+}
+
+.card-laravel {
+    background: linear-gradient(120deg, #ff2d20 60%, #6c757d 100%);
+}
+.card-laravel a {
+    background: linear-gradient(90deg, #ff2d20 60%, #6c757d 100%);
+}
+.card-laravel a:hover {
+    background: linear-gradient(90deg, #6c757d 60%, #ff2d20 100%);
+}
+
+.card-django {
+    background: linear-gradient(120deg, #092e20 60%, #44b78b 100%);
+}
+.card-django a {
+    background: linear-gradient(90deg, #44b78b 60%, #092e20 100%);
+}
+.card-django a:hover {
+    background: linear-gradient(90deg, #092e20 60%, #44b78b 100%);
+}
+
+.card-html {
+    background: linear-gradient(120deg, #e44d26 60%, #f16529 100%);
+}
+.card-html a {
+    background: linear-gradient(90deg, #e44d26 60%, #f16529 100%);
+}
+.card-html a:hover {
+    background: linear-gradient(90deg, #f16529 60%, #e44d26 100%);
+}
+
+.card-css {
+    background: linear-gradient(120deg, #264de4 60%, #2965f1 100%);
+}
+.card-css a {
+    background: linear-gradient(90deg, #264de4 60%, #2965f1 100%);
+}
+.card-css a:hover {
+    background: linear-gradient(90deg, #2965f1 60%, #264de4 100%);
+}
+
 /* Ressources */
 .resources {
     display: grid;
