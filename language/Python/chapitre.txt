@@ -1,0 +1,124 @@
+🐍 Formation Python – 60 Chapitres
+🧱 Niveau Débutant – Bases du langage (1–20)
+Introduction à Python
+
+Installation de Python et premiers pas
+
+Variables et types de données
+
+Les chaînes de caractères
+
+Les nombres : entiers et flottants
+
+Les opérateurs en Python
+
+Les structures conditionnelles
+
+Les boucles for et while
+
+Les fonctions
+
+Les listes
+
+Les tuples
+
+Les dictionnaires
+
+Les ensembles
+
+Manipulation des chaînes (méthodes utiles)
+
+Compréhension de liste
+
+Les modules et imports
+
+Les erreurs et exceptions
+
+Les fichiers (lecture/écriture)
+
+Introduction aux tests (assertions simples)
+
+Notions de PEP8 et bonnes pratiques
+
+🧠 Niveau Intermédiaire – Approfondissement (21–40)
+Les fonctions avancées (arguments, *args, **kwargs)
+
+Les lambdas et fonctions anonymes
+
+Les décorateurs
+
+Les générateurs
+
+Les itérateurs
+
+Programmation orientée objet (POO) – bases
+
+Classes et instances
+
+Héritage
+
+Attributs et méthodes spéciaux (__init__, __str__, etc.)
+
+Encapsulation et propriétés
+
+Fichiers JSON et CSV
+
+Manipulation de dates et heures
+
+Introduction à virtualenv et gestion d’environnements
+
+Utilisation de pip et gestion de dépendances
+
+Le module os et le système de fichiers
+
+Le module sys
+
+Le module random
+
+Le module math
+
+Création de scripts utilitaires
+
+Debugging avec pdb et print intelligents
+
+🧩 Niveau Avancé – Projets et bibliothèques (41–60)
+Introduction à NumPy
+
+Introduction à Pandas
+
+Visualisation avec Matplotlib
+
+Web scraping avec requests et BeautifulSoup
+
+Utiliser les API (ex: API REST avec requests)
+
+Développement Web avec Flask – bases
+
+Développement Web avec Django – bases
+
+Les bases des bases de données avec SQLite
+
+ORM avec SQLAlchemy
+
+Multithreading et multiprocessing
+
+Asynchrone avec asyncio
+
+Tests unitaires avec unittest
+
+Introduction à pytest
+
+Logging et journalisation
+
+Packaging d’un module Python
+
+Publier un package sur PyPI
+
+Interface graphique avec Tkinter
+
+Petits jeux avec pygame
+
+Projet final : application complète
+
+Conseils pour progresser : projets, GitHub, documentation
+

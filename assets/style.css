@@ -1,59 +1,235 @@
-ul {display: flex;
-    flex-direction: column;}
+:root {
+    --main-blue: #2563eb;
+    --main-gray: #f3f4f6;
+    --main-dark: #222;
+    --main-light: #fff;
+    --main-accent: #60a5fa;
+     /* Espacements */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
 
-    /* Styles globaux */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    /* Bordures */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Ombres */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background: linear-gradient(120deg, #e5e7eb 0%, #fff 100%);
+    color: var(--main-dark);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
 }
 
-/* Conteneur de la vidéo */
-.video-container {
-    background-color: #ff0000;  /* Rouge */
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
-    margin: 20px auto;
+header {
+    background: linear-gradient(90deg, var(--main-blue) 60%, var(--main-accent) 100%);
+    color: var(--main-light);
+    padding: var(--space-xl) var(--space-md) var(--space-lg) var(--space-md);
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.10);
+    border-radius: 0 0 32px 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--main-accent), var(--main-blue));
+    border-radius: 0 0 16px 16px;
+}
+
+header p {
+    margin-top: var(--space-xs);
+    font-style: italic;
+    opacity: 0.95;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+}
+
+main {
+    max-width: 900px;
+    width: 100%;
+    margin: var(--space-xl) auto;
+    padding: 0 var(--space-md);
+    flex: 1;
+}
+
+section {
+    margin-bottom: var(--space-xl);
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: var(--space-xs);
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 8px rgba(37, 99, 235, 0.13);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--main-blue);
+    position: relative;
+    padding-left: var(--space-sm);
+    margin: var(--space-lg) 0 var(--space-md);
+    text-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 5px;
+    background: linear-gradient(180deg, var(--main-accent), var(--main-blue));
+    border-radius: var(--radius-lg);
+}
+
+/* Cartes de liens */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.card {
+    background: linear-gradient(120deg, #f3f4f6 60%, #e5e7eb 100%);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 24px rgba(37, 99, 235, 0.13), 0 1.5px 6px rgba(37, 99, 235, 0.07);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    transition: transform 0.22s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s;
+    position: relative;
+    overflow: hidden;
     text-align: center;
 }
 
-/* Titre de la vidéo */
-.video-title {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 15px;
+.card:hover {
+    transform: translateY(-8px) scale(1.025);
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.18), 0 2px 8px rgba(37, 99, 235, 0.10);
+    background: linear-gradient(120deg, #e5e7eb 60%, #f3f4f6 100%);
 }
 
-/* Lien vers la vidéo avec style */
-.video-link {
+.card a {
     display: inline-block;
-    color: white;
-    font-size: 18px;
+    padding: 0.7em 1.6em;
+    background: linear-gradient(90deg, var(--main-blue) 60%, var(--main-accent) 100%);
+    color: var(--main-light);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1.05rem;
     text-decoration: none;
-    padding: 10px 20px;
-    border: 2px solid white;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.10);
+    border: none;
+    transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    margin-top: 1rem;
 }
 
-/* Effet au survol du lien */
-.video-link:hover {
-    background-color: #ff5555;  /* Couleur rouge plus claire */
+.card a:hover {
+    background: linear-gradient(90deg, var(--main-accent) 60%, var(--main-blue) 100%);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.13);
 }
 
-/* Icône YouTube */
-.video-link i {
-    margin-right: 10px;
-    font-size: 20px;
+/* Ressources */
+.resources {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
 }
 
-/* Ajout de style pour le logo YouTube avec FontAwesome */
-.fab.fa-youtube {
-    color: white;
+.resource-card {
+    background: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.2rem 1rem;
+    text-align: center;
+    transition: box-shadow 0.18s, transform 0.18s;
+}
+
+.resource-card a {
+    color: var(--main-blue);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.resource-card a:hover {
+    color: var(--main-accent);
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: var(--space-md);
+    margin-top: var(--space-xl);
+    border-top: 1px solid var(--main-gray);
+    color: var(--main-dark);
+    font-size: 1rem;
+    background: linear-gradient(90deg, #fff 60%, #f3f4f6 100%);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 -2px 8px rgba(37, 99, 235, 0.07);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    main {
+        max-width: 98vw;
+        padding: 0 var(--space-xs);
+    }
+
+    .cards,
+    .resources {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    header {
+        padding: var(--space-lg) var(--space-xs);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .card {
+        padding: 1.2rem 0.8rem 1rem 0.8rem;
+    }
 }
