@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Les Cookies</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Les Cookies en PHP</h1>
+        <p>Comprendre et manipuler les cookies pour gérer les données côté client</p>
+    </header>
+
+    <div class="video-container">
+        <h2 class="video-title">Vidéo explicative</h2>
+        <a href="https://www.youtube.com/watch?v=LARX660fup0&list=PLjwdMgw5TTLVDv-ceONHM_C19dPW1MAMD&index=17"
+            class="video-link">
+            Apprendre le PHP : Chapitre 17, Les Cookies
+        </a>
+    </div>
+    <main>
+        <h1>Les Cookies en PHP</h1>
+
+        <h2>1. Qu'est-ce qu'un cookie ?</h2>
+        <p>
+            Un cookie est un petit fichier stocké sur l'ordinateur de l'utilisateur par le navigateur web. Il permet de sauvegarder des informations entre les visites d'un site (identifiant, préférences, etc.).
+        </p>
+
+        <h2>2. Créer un cookie en PHP</h2>
+        <p>
+            Utilisez la fonction <code>setcookie()</code> pour créer un cookie :
+        </p>
+        <pre>
+&lt;?php
+setcookie("nom", "Jean", time() + 3600); // expire dans 1 heure
+?&gt;
+        </pre>
+        <p>
+            Le cookie sera disponible lors du prochain chargement de page.
+        </p>
+
+        <h2>3. Lire un cookie</h2>
+        <p>
+            Les cookies sont accessibles via le tableau <code>$_COOKIE</code> :
+        </p>
+        <pre>
+&lt;?php
+echo $_COOKIE["nom"];
+?&gt;
+        </pre>
+
+        <h2>4. Supprimer un cookie</h2>
+        <p>
+            Pour supprimer un cookie, il suffit de le réécrire avec une date d'expiration passée :
+        </p>
+        <pre>
+&lt;?php
+setcookie("nom", "", time() - 3600);
+?&gt;
+        </pre>
+
+        <h2>5. Bonnes pratiques</h2>
+        <ul>
+            <li>Définir les cookies avant tout affichage HTML (avant <code>&lt;html&gt;</code>).</li>
+            <li>Utiliser les options de sécurité (<code>secure</code>, <code>httponly</code>, <code>samesite</code>).</li>
+            <li>Ne stockez jamais d'informations sensibles dans un cookie.</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

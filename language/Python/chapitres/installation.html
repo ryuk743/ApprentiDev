@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python - Installation sur Windows</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Guide d'installation de Python</h1>
+        <p>Un tutoriel complet pour configurer Python sur votre système Windows</p>
+    </header>
+
+    <div class="video-container">
+        <h2 class="video-title">Vidéo explicative</h2>
+        <a href="https://www.youtube.com/watch?v=YYXdXT2l-Gg" class="video-link">
+            Apprendre Python : Installer Python sur Windows (YouTube)
+        </a>
+    </div>
+    <main>
+        <h1>Installation de Python sur Windows</h1>
+
+        <h2>1. Télécharger Python</h2>
+        <p>
+            Rendez-vous sur le site officiel de Python : <a href="https://www.python.org/downloads/">python.org/downloads</a>.<br>
+            Cliquez sur le bouton "Download Python" (la version la plus récente est recommandée).<br>
+            Téléchargez l'installeur adapté à votre système (Windows).
+        </p>
+
+        <h2>2. Lancer l'installation</h2>
+        <ol>
+            <li>Ouvrez le fichier téléchargé (ex : <code>python-3.x.x.exe</code>).</li>
+            <li><strong>Important :</strong> Cochez la case <b>"Add Python to PATH"</b> avant de cliquer sur "Install Now".</li>
+            <li>Cliquez sur "Install Now" et laissez l'installation se terminer.</li>
+        </ol>
+
+        <h2>3. Vérifier l'installation</h2>
+        <p>
+            Ouvrez l'invite de commande (CMD) et tapez la commande suivante :
+        </p>
+        <pre>python --version</pre>
+        <p>
+            Si Python est installé, la version s'affichera (ex : <code>Python 3.12.0</code>).<br>
+            Si la commande n'est pas reconnue, redémarrez votre ordinateur ou vérifiez que Python est bien ajouté au PATH.
+        </p>
+
+        <h2>4. Installer pip (gestionnaire de paquets)</h2>
+        <p>
+            Pip est normalement installé automatiquement avec Python. Pour vérifier :
+        </p>
+        <pre>pip --version</pre>
+        <p>
+            Si la version de pip s'affiche, tout est prêt.<br>
+            Sinon, consultez la documentation officielle : <a href="https://pip.pypa.io/en/stable/installation/">Installer pip</a>
+        </p>
+
+        <h2>5. Tester Python</h2>
+        <p>
+            Créez un fichier <code>test.py</code> avec le code suivant :
+        </p>
+        <pre>print("Python fonctionne !")</pre>
+        <p>
+            Exécutez-le avec la commande <code>python test.py</code> dans le terminal.<br>
+            Si le message s'affiche, Python est bien installé.
+        </p>
+
+        <h2>6. Ressources complémentaires</h2>
+        <ul>
+            <li><a href="https://docs.python.org/fr/3/using/windows.html" target="_blank">Documentation officielle : Installer Python sur Windows</a></li>
+            <li><a href="https://www.youtube.com/results?search_query=installer+python+windows" target="_blank">Tutoriels vidéo sur YouTube</a></li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage Python &copy; 2025 | Pour toute question, consultez la <a
+                href="https://docs.python.org/fr/3/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

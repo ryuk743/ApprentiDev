@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Écriture de fichiers</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Écriture de fichiers en PHP</h1>
+        <p>Apprendre le PHP : Chapitre 16, Écriture de fichiers</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Dans ce chapitre, nous allons apprendre à écrire dans des fichiers en PHP. L'écriture de fichiers permet de sauvegarder des données sur le serveur, comme des logs, des résultats ou des configurations.
+            </p>
+        </section>
+
+        <section>
+            <h2>Écriture simple avec <code>file_put_contents</code></h2>
+            <pre>
+// Syntaxe de base
+file_put_contents($chemin, $donnees);
+
+// Exemple simple
+file_put_contents('demo.txt', "Salut les gens");
+
+// Si le fichier n'existe pas, il sera créé automatiquement.
+// Attention : le contenu précédent est écrasé.
+            </pre>
+            <p>
+                Pour ajouter du contenu à la fin du fichier sans l'écraser, utilisez le drapeau <code>FILE_APPEND</code> :
+            </p>
+            <pre>
+file_put_contents('demo.txt', "Nouvelle ligne", FILE_APPEND);
+            </pre>
+            <p>
+                Pour écrire dans un dossier spécifique, utilisez <code>__DIR__</code> et <code>DIRECTORY_SEPARATOR</code> :
+            </p>
+            <pre>
+$fichier = __DIR__ . DIRECTORY_SEPARATOR . 'demo.txt';
+file_put_contents($fichier, "Contenu");
+            </pre>
+        </section>
+
+        <section>
+            <h2>Écriture avancée avec <code>fopen</code> et <code>fwrite</code></h2>
+            <pre>
+$fichier = fopen('demo.txt', 'a'); // 'a' pour ajouter à la fin
+fwrite($fichier, "Nouvelle ligne\n");
+fclose($fichier);
+            </pre>
+            <p>
+                <code>fopen</code> ouvre le fichier, <code>fwrite</code> écrit le texte, <code>fclose</code> ferme le fichier.
+            </p>
+        </section>
+
+        <section>
+            <h2>Gestion des erreurs</h2>
+            <pre>
+$taille = @file_put_contents('demo.txt', "Test");
+if ($taille === false) {
+    echo "Impossible d'écrire dans le fichier";
+} else {
+    echo "Écriture réussie";
+}
+            </pre>
+            <p>
+                Le <code>@</code> masque les erreurs, pensez à vérifier le retour de la fonction.
+            </p>
+        </section>
+
+        <section>
+            <h2>Bonnes pratiques</h2>
+            <ul>
+                <li>Utilisez <code>__DIR__</code> et <code>DIRECTORY_SEPARATOR</code> pour les chemins de fichiers</li>
+                <li>Vérifiez toujours le retour des fonctions d'écriture</li>
+                <li>Fermez vos fichiers avec <code>fclose()</code> après utilisation</li>
+                <li>Pour ajouter du texte, utilisez <code>FILE_APPEND</code> ou le mode <code>'a'</code> de <code>fopen</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Exercice pratique</h2>
+            <article>
+                <h3>Écrire dans un fichier</h3>
+                <pre>
+file_put_contents('test.txt', "Bonjour PHP !");
+                </pre>
+            </article>
+            <article>
+                <h3>Ajouter une ligne à un fichier</h3>
+                <pre>
+file_put_contents('test.txt', "Nouvelle ligne", FILE_APPEND);
+                </pre>
+            </article>
+            <article>
+                <h3>Écrire avec <code>fwrite</code></h3>
+                <pre>
+$fichier = fopen('test.txt', 'a');
+fwrite($fichier, "Encore une ligne\n");
+fclose($fichier);
+                </pre>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentisage PHP &copy; 2025 | Pour toute question, consultez la <a href="https://www.php.net/docs.php">documentation officielle</a></p>
+    </footer>
+</body>
+</html>
